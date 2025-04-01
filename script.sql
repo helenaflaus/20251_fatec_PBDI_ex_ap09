@@ -3,6 +3,66 @@
 --Nota. Para cada exercício, gere valores aleatórios conforme a necessidade. Use a função
 --do Bloco de Código 1.1.
 
+--1.5 Resolva o problema:
+--IF
+DO $$
+DECLARE
+    salario NUMERIC (10, 2) := valor_aleatorio_entre(1,5000);  
+    reajuste NUMERIC (10, 2);
+    nvsalario NUMERIC (10, 2);
+    percentual INT;
+BEGIN
+    IF salario <= 400 THEN
+        reajuste := salario * 0.15;
+        percentual := 15;
+    ELSIF salario <= 800 THEN
+        reajuste := salario * 0.12;
+        percentual := 12;
+    ELSIF salario <= 1200 THEN
+        reajuste := salario * 0.10;
+        percentual := 10;
+    ELSIF salario <= 2000 THEN
+        reajuste := salario * 0.07;
+        percentual := 7;
+    ELSE
+        reajuste := salario * 0.04;
+        percentual := 4;
+    END IF;
+    nvsalario := salario + reajuste;
+    RAISE NOTICE 'Novo salario: R$ %, reajuste: R$ %, percentual = % %%', nvsalario, reajuste, percentual;
+END
+$$;
+
+--CASE
+DO $$
+DECLARE
+    salario NUMERIC (10, 2) := valor_aleatorio_entre(1,5000);  
+    reajuste NUMERIC (10, 2);
+    nvsalario NUMERIC (10, 2);
+    percentual INT;
+BEGIN
+    CASE
+    WHEN salario <= 400 THEN
+        reajuste := salario * 0.15;
+        percentual := 15;
+    WHEN salario <= 800 THEN
+        reajuste := salario * 0.12;
+        percentual := 12;
+    WHEN salario <= 1200 THEN
+        reajuste := salario * 0.10;
+        percentual := 10;
+    WHEN salario <= 2000 THEN
+        reajuste := salario * 0.07;
+        percentual := 7;
+    ELSE
+        reajuste := salario * 0.04;
+        percentual := 4;
+    END CASE;
+    nvsalario := salario + reajuste;
+    RAISE NOTICE 'Novo salario: R$ %, reajuste: R$ %, percentual = % %%', nvsalario, reajuste, percentual;
+END
+$$;
+
 --1.4 Um comerciante comprou um produto e quer vendê-lo com um lucro de 45% se o valor da compra for menor que R$20. Caso contrário, ele deseja lucro de 30%. 
 --Faça um programa que, dado o valor do produto, calcula o valor de venda.
 --IF
