@@ -3,9 +3,59 @@
 --Nota. Para cada exercício, gere valores aleatórios conforme a necessidade. Use a função
 --do Bloco de Código 1.1.
 
---1.4 Um comerciante comprou um produto e quer vendê-lo com um lucro de 45% se o valor
---da compra for menor que R$20. Caso contrário, ele deseja lucro de 30%. Faça um
---programa que, dado o valor do produto, calcula o valor de venda.
+--1.4 Um comerciante comprou um produto e quer vendê-lo com um lucro de 45% se o valor da compra for menor que R$20. Caso contrário, ele deseja lucro de 30%. 
+--Faça um programa que, dado o valor do produto, calcula o valor de venda.
+--IF
+DO $$
+DECLARE
+    prod INT := valor_aleatorio_entre(1,30);  
+    lucro NUMERIC (10, 2);
+    venda NUMERIC (10, 2);
+BEGIN
+    IF prod < 20 THEN
+        lucro := prod * 0.45;
+        venda := lucro + prod;
+    ELSE
+        lucro := prod * 0.30;
+        venda := lucro + prod;
+    END IF;
+    RAISE NOTICE 'Produto: R$ %, lucro: R$ %, valor de venda = R$ %', prod, lucro, venda;
+END
+$$;
+
+--CASE
+DO $$
+DECLARE
+    prod INT := valor_aleatorio_entre(1,30);  
+    lucro NUMERIC (10, 2);
+    venda NUMERIC (10, 2);
+BEGIN
+    CASE
+        WHEN prod < 20 THEN
+            lucro := prod * 0.45;
+            venda := lucro + prod;
+        ELSE
+            lucro := prod * 0.30;
+            venda := lucro + prod;
+    END CASE;
+    RAISE NOTICE 'Produto: R$ %, lucro: R$ %, valor de venda = R$ %', prod, lucro, venda;
+END
+$$;
+--CASE
+DO $$
+DECLARE
+    prod INT := valor_aleatorio_entre(1,30);  
+    lucro NUMERIC (10, 2);
+    venda NUMERIC (10, 2);
+BEGIN
+    lucro := CASE  
+        WHEN prod < 20 THEN prod * 0.45  
+        ELSE prod * 0.30  
+    END;  
+    venda := lucro + prod; 
+    RAISE NOTICE 'Produto: R$ %, lucro: R$ %, valor de venda = R$ %', prod, lucro, venda;
+END
+$$;
 
 
 --1.3 Faça um programa que opera de acordo com o seguinte menu.
